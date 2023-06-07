@@ -1,22 +1,29 @@
-import { MouseEvent } from "react";
+import { useState } from "react";
 
-function ListGroup() {
-  let items = ["new-york", "sans francisco", "tokyo", "london", "paris"];
+interface Props {
+  items: string[];
+  heading: string;
+}
 
-
-  // EventHandler convention : name it handle(nameEvent)
-	// log(event) or log(event.something) to target all event properties
-  const handleClick = (event: MouseEvent) => console.log(event);
+function ListGroup({items, heading}: Props) {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
   return (
     <>
-      <h1>List</h1>
+      <h1>{heading}</h1>
+      {items.length === 0 && <p>no item found</p>}
       <ul className="list-group">
         {items.map((item, index) => (
           <li
-            className="list-group-item"
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
             key={item}
-            onClick={handleClick}
+            onClick={() => {
+              setSelectedIndex(index);
+            }}
           >
             {item}
           </li>
@@ -26,5 +33,3 @@ function ListGroup() {
   );
 }
 export default ListGroup;
-
-// => SyntheticBaseEvent {_reactName: 'onClick', _targetIn
