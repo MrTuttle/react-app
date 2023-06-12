@@ -1,13 +1,11 @@
-import Alert from "./components/Alert";
+import Button from "./components/Button";
 
 function App() {
   return (
     <div>
-      <Alert>
-      Texte long qu'on à <strong>pas envie de voir dans un paramètre de balise</strong> parce qu'on a une conscience esthétique tout de même
-      </Alert>
+      <Button color="secondary" onClick={() => console.log("clicked")}>Mon bouton</Button>
     </div>
-  );
+  )
 }
 
 export default App
