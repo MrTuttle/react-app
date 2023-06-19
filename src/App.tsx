@@ -1,12 +1,21 @@
+import { useState } from "react";
 import Button from "./components/Button";
 import Alert from "./components/Alert";
 
 
 function App() {
+  // state hook return a array of two states
+  const [alertVisible, setAlertVisibility] = useState(false);
   return (
     <div>
-      <Alert>Mon <strong>alerte</strong></Alert>
-      <Button onClick={() => console.log("clicked")}>Mon bouton</Button>
+      // condition && : rendre l'alerte uniquement si elle est définit sur true
+      { alertVisible && <Alert onClose={() => setAlertVisibility(false)}>Mon alerte</Alert>}
+      {console.log(`alertVisible = ${alertVisible}`)}
+      {console.log(`setAlertVisibility = ${setAlertVisibility}`)}
+      {console.log(`useState = ${useState}`)}
+
+
+      <Button onClick={() => setAlertVisibility(true)}>Mon bouton</Button>
     </div>
   )
 }
