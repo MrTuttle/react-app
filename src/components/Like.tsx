@@ -8,6 +8,7 @@ interface Props {
 
 const Like = ({onClick}: Props) => {
   const [status, setStatus] = useState(true);
+
   const toggle = () => {
     setStatus(!status);
     onClick();
