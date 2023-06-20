@@ -1,19 +1,39 @@
-import React from "react";
+import { FormEvent, useRef } from "react";
 
 const Form = () => {
+  const nameRef = useRef<HTMLInputElement>(null);
+  const ageRef = useRef<HTMLInputElement>(null);
+  const person = { name: '', age:0 };
+
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    if (nameRef.current !== null)
+      person.name = nameRef.current.value;
+
+    if (ageRef.current !== null)
+      person.age = parseInt(ageRef.current.value);
+    console.log(person)
+
+  }
   return (
-    <form>
+
+    <form onSubmit={handleSubmit}>
       <div className="mb-3">
         <label htmlFor="name" className="form-label">
           Name
         </label>
-        <input type="text" id="name" className="form-control" />
+        <input type="text" ref={nameRef} id="name" className="form-control" />
       </div>
       <div className="mb-3">
-        <label htmlFor="age" className="form-label">Age</label>
-        <input type="number" id="age" className="form-control" />
+        <label htmlFor="age" className="form-label">
+          Age
+        </label>
+        <input type="number" ref={ageRef} id="age" className="form-control" />
       </div>
-      <button className="btn btn-primary" type="submit">Submit</button>
+      <button className="btn btn-primary" type="submit">
+        Submit
+      </button>
     </form>
   );
 };
