@@ -1,32 +1,21 @@
-import React, { useState } from "react";
-import List from "./components/Listing";
-
+import ExpandableText from "./components/expandableText";
 function App() {
-  const [cart, setCart] = useState({
-    discount: .1,
-    items: [
-      { description: 'Milk', category:'grocery', amount: 1},
-      { description: 'eggs', category:'Utilities', amount: 1},
-
-    ],
-  });
-
-  const handleClick = () => {
-    //game.player.title = 'bob';
-    // setBugs(bugs.map(bug => bug.id === 1 ? {...bug, fixed: true} : bug))
-
-    console.log(cart.items.map(item => item.amount))
-  };
-
   return (
-    <>
     <div>
-      <List />
-      {/* {cart.discount}{cart.items} */}
-      <button className="btn btn-primary" onClick={handleClick}>Click me</button>
+      <ExpandableText maxChars={10}>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe,
+        nesciunt voluptates? Sequi, quos nostrum! Tempora, saepe possimus beatae
+        quod fugit hic aut doloribus tempore. Omnis qui sequi, optio magni
+        debitis veritatis nulla eaque, fugiat, obcaecati deleniti dolor quia
+        inventore. Voluptas corrupti incidunt veniam esse deleniti nesciunt,
+        iste aperiam tempore cum dignissimos nulla modi consequuntur pariatur
+        dolores beatae cumque, voluptatum consequatur a minus consectetur eos?
+        Dolorem voluptate ipsum possimus ex doloremque amet vero reiciendis,
+        odio consequuntur neque ducimus numquam molestias ad. Atque cum
+        accusamus explicabo fugit doloremque autem id quos est natus veniam,
+        illum itaque ut enim nulla minus sapiente perspiciatis?
+      </ExpandableText>
     </div>
-    </>
   );
 }
-
 export default App;
