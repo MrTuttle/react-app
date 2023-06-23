@@ -19,7 +19,7 @@ function List() {
       <td>Mark</td>
       <td>Otto</td>
       <td>@mdo</td>
-      <td><Button>Delete</Button></td>
+      <td><Button children="Delete"/></td>
 
     </tr>
     <tr>
@@ -27,7 +27,7 @@ function List() {
       <td>Jacob</td>
       <td>Thornton</td>
       <td>@fat</td>
-      <td><Button>Delete</Button></td>
+      <td><button className="btn btn-outline-danger">Effacer</button></td>
 
     </tr>
     <tr>

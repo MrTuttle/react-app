@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import List from "./components/Listing";
+import FormProducts from "./components/FormProducts";
 
 function App() {
   const [cart, setCart] = useState({
@@ -21,6 +22,7 @@ function App() {
   return (
     <>
     <div>
+      <FormProducts />
       <List />
       {/* {cart.discount}{cart.items} */}
       <button className="btn btn-primary" onClick={handleClick}>Click me</button>
