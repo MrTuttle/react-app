@@ -16,17 +16,17 @@ function List() {
   <tbody>
     <tr>
       <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <td>Milk</td>
+      <td>5.00</td>
+      <td>Grocery</td>
       <td><Button children="Delete"/></td>
 
     </tr>
     <tr>
       <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
+      <td>Eggs</td>
+      <td>1.00</td>
+      <td>Grocery</td>
       <td><button className="btn btn-outline-danger">Effacer</button></td>
 
     </tr>

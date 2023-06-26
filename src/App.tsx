@@ -15,8 +15,14 @@ function App() {
   const handleClick = () => {
     //game.player.title = 'bob';
     // setBugs(bugs.map(bug => bug.id === 1 ? {...bug, fixed: true} : bug))
+    //
+    console.log("description :" + cart.items.map(item => item.description))
+    console.log("description :" + cart.items.map(item => item.category))
+    console.log("amount :" + cart.items.map(item => item.amount))
+    console.log("first product :" + cart.items[0].description)
+    console.log("second product :" + cart.items[1].description)
 
-    console.log(cart.items.map(item => item.amount))
+
   };
 
   return (

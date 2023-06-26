@@ -20,7 +20,8 @@ const Form = () => {
     formState: { errors, isValid },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-  const onSubmit = (data: FieldValues) => console.log(data);
+  // const onSubmit = (data: FieldValues) => console.log("affiche les datas" + data);
+  const onSubmit = (data: FieldValues) => console.log("affiche les datas" + data.description);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -53,8 +54,9 @@ const Form = () => {
         )}
       </div>
       <div className="form-group mb-3">
-        <label htmlFor="" className="form-label"></label>
+        <label htmlFor="" className="form-label">Category</label>
         <select type="text" className="form-control" >
+          <option value=""></option>
           <option value="">Groceries</option>
           <option value="">Utilities</option>
           <option value="">Entertainment</option>
