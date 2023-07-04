@@ -1,3 +1,4 @@
+// src/expense-tracker/components/ExpenseList.tsx
 
 interface Expense {
   id: number;
