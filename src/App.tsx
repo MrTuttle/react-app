@@ -6,10 +6,8 @@ const connect = () => console.log('connecting');
 const disconnect = () => console.log('disconnect');
 
 function App() {
-  useEffect( () => {
-    connect();
-    return () => disconnect();
-  });
+
+  };
 
   return (
     <div>
