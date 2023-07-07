@@ -53,15 +53,37 @@ function App() {
     // add newUser to state
     setUsers([newUser, ...users]);
     axios
-    .post("https://jsonplaceholder.typicode.com/users", newUser)
-    // include new object in the body of the response (res.data), and spread the users array (...users)
-    // if the call is successfull we refresh the list with the saved user
-    .then(({data:  savedUser }) => setUsers([savedUser, ...users]))
-    // same .catch than deleteUser
-    .catch((err) => {
+      .post("https://jsonplaceholder.typicode.com/users", newUser)
+      // include new object in the body of the response (res.data), and spread the users array (...users)
+      // if the call is successfull we refresh the list with the saved user
+      .then(({ data: savedUser }) => setUsers([savedUser, ...users]))
+      // same .catch than deleteUser
+      .catch((err) => {
+        setError(err.message);
+        setUsers(originalUsers);
+      });
+  };
+
+  const updateUser = (user: User) => {
+    // hard coding update for this example - form data in real world
+    const updatedUser = {...user, name: user.name + '!'};
+
+    // => if id of current user (u) equals the id of the user that is passed to this function (user: User)
+    // then return the update user (updateUser), otherwise return the current user (u)
+    setUsers(users.map(u => u.id === user.id ? updatedUser : u));
+
+    // for . catch
+    const originalUsers = [...users];
+
+    axios
+    .patch("https://jsonplaceholder.typicode.com/users/" + user.id, updatedUser )
+    .catch(err => {
       setError(err.message);
       setUsers(originalUsers);
     });
+
+
+
 
   };
 
@@ -79,12 +101,20 @@ function App() {
             className="list-group-item d-flex justify-content-between"
           >
             {user.name}
-            <button
-              className="btn btn-outline-danger"
-              onClick={() => deleteUser(user)}
-            >
-              Delete
-            </button>
+            <div>
+              <button
+                className="btn btn-outline-secondary mx-2"
+                onClick={() => updateUser(user)}
+              >
+                Update
+              </button>
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => deleteUser(user)}
+              >
+                Delete
+              </button>
+            </div>
           </li>
         ))}
       </ul>
