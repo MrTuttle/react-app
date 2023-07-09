@@ -16,6 +16,10 @@ class UserService {
       signal: controller.signal,
     });
     return { request, cancel: () => controller.abort()}
+  }
+
+  deleteUser(id: number) {
+    return apiClient.delete("/users/" + id);
 
   }
 

@@ -34,9 +34,8 @@ function App() {
   const deleteUser = (user: User) => {
     const originalUsers = [...users];
     setUsers(users.filter((u) => u.id !== user.id));
-    apiClient
-      .delete("/users/" + user.id)
-      .catch((err) => {
+
+      userService.deleteUser(user.id).catch((err) => {
         setError(err.message);
         setUsers(originalUsers);
       });
