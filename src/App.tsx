@@ -2,11 +2,8 @@
 
 // import axios, { CanceledError} from "axios";
 import { useEffect, useState } from "react";
-import apiClient, {CanceledError} from "./services/api-client";
+import { CanceledError } from "./services/api-client";
 import userService, { User } from "./services/user-service";
-
-
-
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
@@ -14,11 +11,10 @@ function App() {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-
     setLoading(true);
-    const {request, cancel} = userService
-      .getAllUsers();
-      request.then((res) => {
+    const { request, cancel } = userService.getAllUsers();
+    request
+      .then((res) => {
         setUsers(res.data);
         setLoading(false);
       })
@@ -35,10 +31,10 @@ function App() {
     const originalUsers = [...users];
     setUsers(users.filter((u) => u.id !== user.id));
 
-      userService.deleteUser(user.id).catch((err) => {
-        setError(err.message);
-        setUsers(originalUsers);
-      });
+    userService.deleteUser(user.id).catch((err) => {
+      setError(err.message);
+      setUsers(originalUsers);
+    });
   };
 
   const addUser = (user: User) => {
@@ -46,7 +42,7 @@ function App() {
     const newUser = { id: 0, name: "Flo" };
     setUsers([newUser, ...users]);
     userService
-    .createUser(newUser)
+      .createUser(newUser)
       .then(({ data: savedUser }) => setUsers([savedUser, ...users]))
       .catch((err) => {
         setError(err.message);
@@ -55,12 +51,10 @@ function App() {
   };
 
   const updateUser = (user: User) => {
-    const updatedUser = {...user, name: user.name + '!'};
-    setUsers(users.map(u => u.id === user.id ? updatedUser : u));
+    const updatedUser = { ...user, name: user.name + "!" };
+    setUsers(users.map((u) => (u.id === user.id ? updatedUser : u)));
     const originalUsers = [...users];
-    apiClient
-    .patch("/users/" + user.id, updatedUser )
-    .catch(err => {
+    userService.updateUser(updatedUser).catch((err) => {
       setError(err.message);
       setUsers(originalUsers);
     });
