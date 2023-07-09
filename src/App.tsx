@@ -3,11 +3,10 @@
 // import axios, { CanceledError} from "axios";
 import { useEffect, useState } from "react";
 import apiClient, {CanceledError} from "./services/api-client";
+import userService, { User } from "./services/user-service";
 
-interface User {
-  id: number;
-  name: string;
-}
+
+
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
@@ -15,14 +14,11 @@ function App() {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    const controller = new AbortController();
 
     setLoading(true);
-    apiClient
-      .get<User[]>("/users", {
-        signal: controller.signal,
-      })
-      .then((res) => {
+    const {request, cancel} = userService
+      .getAllUsers();
+      request.then((res) => {
         setUsers(res.data);
         setLoading(false);
       })
@@ -32,7 +28,7 @@ function App() {
         setLoading(false);
       });
 
-    return () => controller.abort();
+    return () => cancel();
   }, []);
 
   const deleteUser = (user: User) => {
@@ -47,18 +43,12 @@ function App() {
   };
 
   const addUser = (user: User) => {
-    // for the .catch method
     const originalUsers = [...users];
-    // in real world, properties here will be based on the values of a form
     const newUser = { id: 0, name: "Flo" };
-    // add newUser to state
     setUsers([newUser, ...users]);
     apiClient
       .post("/users", newUser)
-      // include new object in the body of the response (res.data), and spread the users array (...users)
-      // if the call is successfull we refresh the list with the saved user
       .then(({ data: savedUser }) => setUsers([savedUser, ...users]))
-      // same .catch than deleteUser
       .catch((err) => {
         setError(err.message);
         setUsers(originalUsers);
@@ -66,26 +56,15 @@ function App() {
   };
 
   const updateUser = (user: User) => {
-    // hard coding update for this example - form data in real world
     const updatedUser = {...user, name: user.name + '!'};
-
-    // => if id of current user (u) equals the id of the user that is passed to this function (user: User)
-    // then return the update user (updateUser), otherwise return the current user (u)
     setUsers(users.map(u => u.id === user.id ? updatedUser : u));
-
-    // for . catch
     const originalUsers = [...users];
-
     apiClient
     .patch("/users/" + user.id, updatedUser )
     .catch(err => {
       setError(err.message);
       setUsers(originalUsers);
     });
-
-
-
-
   };
 
   return (
