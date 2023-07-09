@@ -23,5 +23,10 @@ class UserService {
 
   }
 
+  createUser(user: User) {
+    return apiClient.post("/users", user);
+
+  }
+
 }
 export default new UserService();
